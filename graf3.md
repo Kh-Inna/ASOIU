@@ -2,7 +2,7 @@
 flowchart LR
     subgraph whole [Вся система]
         subgraph one [<i>П_Р_И_Б_О_Р</i>]
-            p0[\.I./] -.- h1
+            p0[\I/] -.- h1
             h01[/Тслом = 200ч/]
             h1([BPEMЯ=Tслом])==> h2[сост:=<br>сломан]
             h2 ==> h3([режим=<br>работа])
@@ -27,7 +27,7 @@ flowchart LR
         end;
 
         subgraph master [М_А_С_Т_Е_Р]
-            p0[\.I./] -.- h11
+            p0[\I/] -.- h11
             h11[режим:=<br>отдых]:::state==> h12([BPEMЯ=Tраб]):::cond
             h12 ==> h13[режим:=работа<br>Tотд:=func__]:::state
             h13 ==> h14([BPEMЯ=Tотд]):::cond
