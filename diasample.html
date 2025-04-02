@@ -1,0 +1,144 @@
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
+<title>Диаграммы процессов</title>
+</head> 
+<body> 
+<style> 
+.panel { 
+  display: flex; 
+  flex-direction: column;
+  height: 100vh; 
+} 
+.diagram {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+</style> 
+<div class="panel"> 
+    <div class="diagram">
+        <div class="mermaid" id="blockproc">  
+flowchart LR
+    src1["K\nгенератор\n."] --> k1((комп)) --> datac["П\nЦентр\n."]
+    spec["А\nспециалист\n."] --> a2((режим))
+    a2 --> datac
+    a1((мастер)) --> spec
+    datac --> a3((Трем))
+    spec --> a3
+    datac --> datac
+    datac <--> a1
+    h0[/режим,мастер,Трем - скаляры/]
+    
+    classDef parone fill:#fcc,stroke:#333,stroke-width:1px
+    classDef partwo fill:#fae,stroke:#333,stroke-width:1px
+    classDef partre fill:#ccc,stroke:#333,stroke-width:1px
+    classDef blocks fill:#cfc,stroke:#333,stroke-width:1px
+    
+    class a2 parone
+    class a1 partwo
+    class a3 partre
+    class src1,datac,spec blocks
+    
+    click spec "#link-master" "переход к треку"
+    click datac "#link-equip" "переход к треку"
+    click a3 "#link-equip" "переход к треку"
+    click a1 "#link-master" "переход к треку"
+    click a2 "#link-master" "переход к треку"
+        </div>
+    </div>
+    
+    <div class="diagram">
+        <div class="mermaid" id="link-master">
+flowchart LR
+    p0[/I/] --- h11
+    
+    subgraph master ["МАСТЕР"]
+        h11[режим:=отдых]:::state --> h12([BPEMЯ=Tраб]):::cond
+        h12 --> h13[режим:=работа\nTотд:=func__]:::state
+        h13 --> h14([BPEMЯ=Tотд]):::cond
+        h14 --> h17[Tраб:=func__]:::state
+        h17 --> h15{мастер=...}:::nav
+        h15 -->|"...= занят"| h16[Tрем:=Трем+\nТраб-ВРЕМЯ]:::state
+        h15 -->|"...= своб"| h11
+        h16 --> h11
+    end
+    
+    h11 --> par1((режим))
+    h13 --> par1
+    h16 --> par4((Трем))
+    par2((мастер)) --> h15
+    h01[/Траб = 9ч/]
+    
+    classDef cond fill:#bee,stroke:#333,stroke-width:1px
+    classDef state fill:#9e8,stroke:#333,stroke-width:1px
+    classDef nav fill:#ff0,stroke:#333,stroke-width:1px
+    classDef parone fill:#fcc,stroke:#333,stroke-width:1px
+    classDef partwo fill:#fae,stroke:#333,stroke-width:1px
+    classDef partre fill:#ccc,stroke:#333,stroke-width:1px
+    
+    class par1 parone
+    class par2 partwo
+    class par4 partre
+        </div>
+    </div>
+    
+    <div class="diagram">
+        <div class="mermaid" id="link-equip">
+flowchart LR
+    p0[/I/] --- h1
+    
+    subgraph one ["ПРИБОР"]
+        h01[/Тслом = 200ч/]
+        h1([BPEMЯ=Tслом]) --> h2[сост:=сломан]
+        h2 --> h3([режим=работа])
+        h3 --> h4([мастер=своб])
+        h4 --> h5[мастер:=занят\nTрем:=funk-_]
+        h5 --> h7([ВРЕМЯ=Трем])
+        h7 --> h8[сост:=рабочий\nмастер:=своб\nTслом:=func-_]
+        h8 --> h1
+    end
+    
+    par1((режим)) --> h3
+    h2 --> par3((сост))
+    h8 --> par3
+    par2((мастер)) --> h4
+    h5 --> par4((Трем))
+    h5 --> par2
+    h8 --> par2
+    par4 --> h7
+    
+    classDef cond fill:#bee,stroke:#333,stroke-width:1px
+    classDef state fill:#9e8,stroke:#333,stroke-width:1px
+    classDef navig fill:#fec,stroke:#333,stroke-width:1px
+    classDef parone fill:#fcc,stroke:#333,stroke-width:1px
+    classDef partwo fill:#fae,stroke:#333,stroke-width:1px
+    classDef partre fill:#ccc,stroke:#333,stroke-width:1px
+    
+    class h5,h8,h2 state
+    class h1,h3,h4,h7 cond
+    class par1 parone
+    class par2 partwo
+    class par3,par4 partre
+        </div>
+    </div>
+</div> 
+<script> 
+mermaid.initialize({
+    startOnLoad: true,
+    flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        fontSize: 16
+    },
+    securityLevel: 'loose',
+    fontFamily: 'Arial',
+    theme: 'default'
+});
+</script> 
+</body> 
+</html>
