@@ -1,3 +1,4 @@
+```mermaid 
 flowchart LR 
 title[<b>Модель _Ремонтник_</b>] 
 r1[/"i"/] -.-> r2["режим:=<br>отдых"]; 
@@ -23,3 +24,4 @@ style r7 fill:yellow,stroke:red;
 style r_1 fill:#fcc,stroke:#111,stroke-width:2px; 
 style r_2 fill:#fae,stroke:#bbb,stroke-width:2px; 
 style r9 fill:#ccc,stroke:#555,stroke-width:2px;
+```
