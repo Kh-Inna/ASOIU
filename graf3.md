@@ -1,3 +1,4 @@
+```mermaid
 flowchart LR
     subgraph whole [Вся система]
         subgraph one [<i>П_Р_И_Б_О_Р</i>]
@@ -63,3 +64,4 @@ flowchart LR
 
         linkStyle default stroke:#333,stroke-width:1px;
     end
+```
