@@ -64,4 +64,7 @@ flowchart LR
 
         linkStyle default stroke:#333,stroke-width:1px;
     end
+    click par2 href "https://www.mos.ru" "переход для Мастера" _blank;
+    click par1 href "https://bmstu.ru/" "переход для Режима" _blank;
+    click par3 href "https://github.com/iu5git/Web" "переход для Сост" _blank;
 ```
